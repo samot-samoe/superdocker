@@ -4,6 +4,5 @@ easy_api
 entrypoint
 env
 entrypoint.sh
-requirements_local.txt
+requirements-local.txt
 try.ipynb
-.env
