@@ -1,0 +1,65 @@
+version: '3.7'
+services:
+  postgres:
+    image: postgres
+    # networks:
+      # - backend
+    volumes:
+      - db-data:/etc/data
+      - ./configs/init.sql:/docker-entrypoint-initdb.d/init.sql
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_HOST_AUTH_METHOD: ${POSTGRES_HOST_AUTH_METHOD}
+      POSTGRES_DB: ${POSTGRES_DB}
+    
+    # extra_hosts:
+      # - "pghost:172.18.0.2"
+
+  frontend:
+    image: apache/superset
+    ports:
+      - "27364:8088"
+    restart: always
+    depends_on:
+      - "postgres"
+    volumes:
+      # - ./config/:/home/superset/config/
+      # - ..docker-bootstrap.sh:/usr/bin/docker-bootstrap.sh
+      - ./configs/entrypoint.sh:/app/superset_home/entrypoint.sh
+      - ./configs/superset_config.py:/app/superset_home/superset_config.py
+      - ./configs/config.py:/app/superset/config.py
+      # - ./config/externals.yml:/app/externals.yml
+      # - ./config/endpoint.sh:/app/superset_home/endpoint.sh
+      # - ./easy_api/database.py:/app/superset_home/database.py
+    # entrypoint: ["./entrypoint.sh"]
+    command: ["bash","/app/superset_home/entrypoint.sh","/app/superset/endpoint.sh"]
+    #  ["/bin/sh","-c","/app/superset_home/entrypoint.sh"]
+    # hostname: superset
+
+    # ,"/usr/bin/run-server.sh"]
+    env_file:
+    - .env
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_HOST: ${POSTGRES_HOST}
+      POSTGRES_PORT: ${POSTGRES_PORT}
+      # SUPERSET_ENV: ${SUPERSET_ENV}
+      # SUPERSET_VERSION: ${SUPERSET_VERSION}
+      # CYPRUS_CONFIG: $CYPRESS_CONFIG"
+    # networks:
+      # - frontend
+      # - backend
+    # extra_hosts:
+      # - "pghost:172.18.0.2"
+volumes:
+  db-data:
+    # driver: flocker
+    # driver_opts:
+      # size: "10GiB"
+# networks:
+  # frontend:
+  # backend:
+# 
