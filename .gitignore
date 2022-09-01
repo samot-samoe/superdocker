@@ -3,6 +3,6 @@ docker
 easy_api
 entrypoint
 env
-entrypoint.sh
+entrypoint22.sh
 requirements-local.txt
 try.ipynb
