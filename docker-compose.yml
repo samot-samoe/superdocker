@@ -4,6 +4,7 @@ services:
     image: postgres
     # networks:
       # - backend
+    restart: always
     volumes:
       - db-data:/etc/data
       - ./configs/init.sql:/docker-entrypoint-initdb.d/init.sql
