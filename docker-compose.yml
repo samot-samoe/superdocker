@@ -6,6 +6,7 @@ services:
       # - backend
     restart: always
     volumes:
+      - ./customer_clustering.csv:/etc/customer_clustering.csv
       - db-data:/etc/data
       - ./configs/init.sql:/docker-entrypoint-initdb.d/init.sql
     environment:
@@ -18,7 +19,7 @@ services:
       # - "pghost:172.18.0.2"
 
   frontend:
-    image: apache/superset
+    image: apache/superset:1.5.0
     ports:
       - "27364:8088"
     restart: always
@@ -29,7 +30,7 @@ services:
       # - ..docker-bootstrap.sh:/usr/bin/docker-bootstrap.sh
       - ./configs/entrypoint.sh:/app/superset_home/entrypoint.sh
       - ./configs/superset_config.py:/app/superset_home/superset_config.py
-      - ./configs/config.py:/app/superset/config.py
+      # - ./configs/config.py:/app/superset/config.py
       # - ./config/externals.yml:/app/externals.yml
       # - ./config/endpoint.sh:/app/superset_home/endpoint.sh
       # - ./easy_api/database.py:/app/superset_home/database.py

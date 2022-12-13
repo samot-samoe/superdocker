@@ -91,13 +91,25 @@ class CeleryConfig(object):
 
 CELERY_CONFIG = CeleryConfig
 
-FEATURE_FLAGS = {"ALERT_REPORTS": True, "VERSIONED_EXPORT": True}
+FEATURE_FLAGS = {
+    "ALERT_REPORTS": True, 
+    "VERSIONED_EXPORT": True,
+    'ENABLE_TEMPLATE_PROCESSING': True,
+    "DASHBOARD_CROSS_FILTERS": True,
+    "DASHBOARD_NATIVE_FILTERS": True,
+    "DASHBOARD_RBAC": True}
+    
 ALERT_REPORTS_NOTIFICATION_DRY_RUN = True
 WEBDRIVER_BASEURL = "http://superset:8088/"
 # The base URL for the email report hyperlinks.
 WEBDRIVER_BASEURL_USER_FRIENDLY = WEBDRIVER_BASEURL
 
 SQLLAB_CTAS_NO_LIMIT = True
+SQL_VALIDATORS_BY_ENGINE = {
+    'presto': 'PrestoDBSQLValidator',
+    'trino':'DruidHTTPSDialect'
+}
+
 
 #
 # Optionally import superset_config_docker.py (which will have been included on
