@@ -6,13 +6,13 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-url = 'http://localhost:27364/'
+url = 'http://ccrii1.ranepa.ru:27364/'
 
 payload = {
-    'username': os.getenv('SUPERSET_USER'),
-    'password': os.getenv('SUPERSET_PASSWORD'),
-    # 'username':'admin',
-    # 'password':'admin',
+    # 'username': os.getenv('SUPERSET_USER'),
+    # 'password': os.getenv('SUPERSET_PASSWORD'),
+    'username':'admin',
+    'password':'admin',
     'provider': 'db'
 }
 
@@ -29,17 +29,17 @@ r2=requests.get(url+"api/v1/database/",headers=headerAuth)
 # r2=requests.get('http://localhost:27364/api/v1/database',headers=headerAuth)
 resp_chart=r2.json()
 
-# r3 = requests.get(url+'api/v1/security/csrf_token/',headers = headerAuth)
-# # r3 = requests.get('http://localhost:27364/api/v1/security/csrf_token',headerAuth)
-# # r3.json()
-# csrf_token = r3.json()
-# print(csrf_token)
+r3 = requests.get(url+'api/v1/security/csrf_token/',headers = headerAuth)
+# r3 = requests.get('http://localhost:27364/api/v1/security/csrf_token',headerAuth)
+r3.json()
+csrf_token = r3.json()
+print(csrf_token)
 headerData={
     'Referrer': url+'api/v1/security/login/',
     # 'Referrer': 'http://localhost:27364/api/v1/security/login',
     'Authorization':'Bearer '+str(access_token['access_token']),
-    # 'X-CSRFToken': str(csrf_token['result']),
-    'Content-type':'application/json'
+    'X-CSRFToken': str(csrf_token['result']),
+    # 'Content-type':'application/json'
 }
 
 username = "admin"
@@ -71,7 +71,9 @@ data_out = {
     #   "is_managed_externally": True, 
       "uuid": "2da16a65-2163-4f72-8b12-d05fb10e0c7d"
     }
-# requests.post(url+'api/v1/database/',headers=headerData,json=data_out)    
+r4 = requests.post(url+'api/v1/database/',headers=headerData,json=data_out)  
+result = r4.json()
+print(result)
 
 # # ---------------------Dataset---------------------
 # headerDataset={
@@ -90,23 +92,23 @@ data_out = {
 file_name = '/home/samo/Desktop/superset/tired/students_data.json'
 # json.loa
 
-with open(file_name, 'r') as f:
-    myjson = json.load(f)
-    # print(myjson[2])
-    # print(len(myjson))
-    print(myjson[0]["roles"])
-    for l in myjson:
-        # print(json.loads(l))
-        user_dct = l
-        # 
-        # 
-        payload = {"first_name": user_dct["first_name"],
-                   "last_name": user_dct["last_name"],
-                   "username": user_dct["username"],
-                   "email": user_dct["email"],
-                   "active": 'y',
-                   "conf_password": user_dct["password"],
-                   "password": user_dct["password"],
-                   "roles": user_dct["roles"]
-                  } 
-        requests.post(url=url+'users/add', json=payload)#,headers=headerAuth)
+# with open(file_name, 'r') as f:
+#     myjson = json.load(f)
+#     # print(myjson[2])
+#     # print(len(myjson))
+#     print(myjson[0]["roles"])
+#     for l in myjson:
+#         # print(json.loads(l))
+#         user_dct = l
+#         # 
+#         # 
+#         payload = {"first_name": user_dct["first_name"],
+#                    "last_name": user_dct["last_name"],
+#                    "username": user_dct["username"],
+#                    "email": user_dct["email"],
+#                    "active": 'y',
+#                    "conf_password": user_dct["password"],
+#                    "password": user_dct["password"],
+#                    "roles": user_dct["roles"]
+#                   } 
+#         requests.post(url=url+'users/add', json=payload)#,headers=headerAuth)

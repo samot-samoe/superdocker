@@ -6,3 +6,8 @@ env
 entrypoint22.sh
 requirements-local.txt
 try.ipynb
+users
+export
+another_api.py
+get_req.py
+superset_API.py
