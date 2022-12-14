@@ -91,6 +91,17 @@ class CeleryConfig(object):
 
 CELERY_CONFIG = CeleryConfig
 
+WTF_CSRF_ENABLED= False
+SESSION_COOKIE_SAMESITE = None
+SESSION_COOKIE_SECURE = False 
+SESSION_COOKIE_HTTPONLY = False
+
+LANGUAGES = {
+            "ru": {"flag": "ru", "name": "Russian"},
+            "en": {"flag": "us", "name": "English"},
+            # 'zh': {'flag': 'cn', 'name': 'Chinese'}
+            }
+# BABEL_DEFAULT_LOCALE = "ru"
 FEATURE_FLAGS = {
     "ALERT_REPORTS": True, 
     "VERSIONED_EXPORT": True,
@@ -100,7 +111,6 @@ FEATURE_FLAGS = {
     "DASHBOARD_RBAC": True,
     "OLD_API_CHECK_DATASET_OWNERSHIP" : False,
     "VERSIONED_EXPORT": True,
-    "WTF_CSRF_ENABLED": False
     }
     
 ALERT_REPORTS_NOTIFICATION_DRY_RUN = True

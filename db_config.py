@@ -6,7 +6,8 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-url = 'http://ccrii1.ranepa.ru:27364/'
+# url = 'http://ccrii1.ranepa.ru:27364/'
+url = 'http://localhost:27364/'
 
 payload = {
     # 'username': os.getenv('SUPERSET_USER'),
@@ -33,12 +34,13 @@ r3 = requests.get(url+'api/v1/security/csrf_token/',headers = headerAuth)
 # r3 = requests.get('http://localhost:27364/api/v1/security/csrf_token',headerAuth)
 r3.json()
 csrf_token = r3.json()
-print(csrf_token)
+print(csrf_token['result'])
+print(str(csrf_token['result']))
 headerData={
     'Referrer': url+'api/v1/security/login/',
     # 'Referrer': 'http://localhost:27364/api/v1/security/login',
     'Authorization':'Bearer '+str(access_token['access_token']),
-    'X-CSRFToken': str(csrf_token['result']),
+    'X-CSRFToken': (csrf_token['result']),
     # 'Content-type':'application/json'
 }
 
