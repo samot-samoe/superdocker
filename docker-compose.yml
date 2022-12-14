@@ -4,9 +4,9 @@ services:
     image: postgres
     # networks:
       # - backend
-    restart: always
+    restart: unless-stopped
     volumes:
-      - ./customer_clustering.csv:/etc/customer_clustering.csv
+      # - ./customer_clustering.csv:/etc/customer_clustering.csv
       - db-data:/etc/data
       - ./configs/init.sql:/docker-entrypoint-initdb.d/init.sql
     environment:
