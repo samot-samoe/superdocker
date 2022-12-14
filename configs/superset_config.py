@@ -101,7 +101,7 @@ LANGUAGES = {
             "en": {"flag": "us", "name": "English"},
             # 'zh': {'flag': 'cn', 'name': 'Chinese'}
             }
-# BABEL_DEFAULT_LOCALE = "ru"
+BABEL_DEFAULT_LOCALE = "ru"
 FEATURE_FLAGS = {
     "ALERT_REPORTS": True, 
     "VERSIONED_EXPORT": True,
