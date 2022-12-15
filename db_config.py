@@ -6,8 +6,8 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-url = 'http://ccrii1.ranepa.ru:27364/'
-# url = 'http://localhost:27364/'
+# url = 'http://ccrii1.ranepa.ru:27364/'
+url = 'http://localhost:27364/'
 
 payload = {
     # 'username': os.getenv('SUPERSET_USER'),

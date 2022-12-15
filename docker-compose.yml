@@ -16,7 +16,7 @@ services:
       # - "pghost:172.18.0.2"
 
   frontend:
-    image: apache/superset:1.5.0
+    image: apache/superset:latest-dev
     ports:
       - "27364:8088"
     restart: always
