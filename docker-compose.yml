@@ -4,8 +4,9 @@ services:
     image: postgres
     restart: unless-stopped
     volumes:
-      - db-data:/etc/data
+      # - db-data:/etc/data
       - ./configs/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - ./pgdata:/var/lib/postgresql/data
     environment:
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
@@ -26,7 +27,7 @@ services:
       - ./configs/entrypoint.sh:/app/superset_home/entrypoint.sh
       # - ./configs/superset_config.py:/app/superset_home/superset_config.py
       - ./configs/superset_config.py:/app/pythonpath/superset_config.py
-    command: ["bash","/app/superset_home/entrypoint.sh","/app/superset/endpoint.sh"]
+    command: ["bash","/app/superset_home/entrypoint.sh"]
     #  ["/bin/sh","-c","/app/superset_home/entrypoint.sh"]
 
     env_file:
@@ -38,7 +39,7 @@ services:
       POSTGRES_HOST: ${POSTGRES_HOST}
       POSTGRES_PORT: ${POSTGRES_PORT}
 volumes:
-  db-data:
+  pgdata:
     # driver: flocker
     # driver_opts:
       # size: "10GiB"

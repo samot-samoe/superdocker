@@ -12,3 +12,6 @@ another_api.py
 get_req.py
 superset_API.py
 configs/config.py
+test-data
+db-data
+pgdata
